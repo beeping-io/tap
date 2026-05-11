@@ -9,28 +9,28 @@
 class BeepingCli < Formula
   desc "Official Rust CLI for the Beeping Platform — data over sound"
   homepage "https://github.com/beeping-io/beeping-cli"
-  version "0.0.0"
+  version "0.0.0-test4"
   license "Apache-2.0"
 
   on_macos do
     on_arm do
       url "https://github.com/beeping-io/beeping-cli/releases/download/v#{version}/beeping-cli-aarch64-apple-darwin.tar.xz"
-      sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+      sha256 "1aa6518992a0749472ecc8a95d6c3678515c52bff8e76f1b3ded41ae40a7c7a1"
     end
     on_intel do
       url "https://github.com/beeping-io/beeping-cli/releases/download/v#{version}/beeping-cli-x86_64-apple-darwin.tar.xz"
-      sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+      sha256 "347f298db79ef65526b3cd88454a8e9b9cc725bc6f0108a34d699edb9eb56571"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/beeping-io/beeping-cli/releases/download/v#{version}/beeping-cli-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+      sha256 "178585bf889463bde5369fbce38875620365447743edd5de4e74a64b15f0388d"
     end
     on_intel do
       url "https://github.com/beeping-io/beeping-cli/releases/download/v#{version}/beeping-cli-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+      sha256 "5e0f74be22d9a8ca648cc180685f65997ef614b4d2f2ecd52fade8c3ef8813db"
     end
   end
 
