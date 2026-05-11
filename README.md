@@ -24,20 +24,35 @@ brew install beeping-cli
 
 ## How updates work
 
-The canonical formula lives in
+The canonical formula structure lives in
 [`beeping-io/beeping-cli`](https://github.com/beeping-io/beeping-cli)
-at `external/tap/Formula/beeping-cli.rb`. Each release automatically
-syncs the SHA256 hashes here (BEE-1782, post-BEE-151 bootstrap).
+at `external/tap/Formula/beeping-cli.rb`. On every release of
+`beeping-cli`:
 
-**Direct edits to this repo will be overwritten** by the next release sync.
-File changes upstream in the source-of-truth repo.
+1. Its `release.yml` builds + signs + publishes the binaries with
+   `SHA256SUMS` (BEE-1780) + cosign + SBOM + SLSA L3 (BEE-1781).
+2. It fires a `repository_dispatch` event to this repo with the new
+   tag.
+3. This repo's [`auto-update.yml`](.github/workflows/auto-update.yml)
+   downloads `SHA256SUMS`, regenerates `Formula/beeping-cli.rb` with
+   the real per-target hashes + new version, and commits to
+   `develop`.
+
+The regen script lives at [`scripts/regen-formula.py`](scripts/regen-formula.py)
+and is deterministic — feeding the same tag twice produces the same
+formula. Manual `workflow_dispatch` with a tag input is available
+as a fallback if the dispatch fails.
+
+**Direct edits to `Formula/beeping-cli.rb`** in this repo will be
+overwritten on the next release. File any formula-structure changes
+upstream in the source-of-truth repo's `external/tap/Formula/beeping-cli.rb`.
 
 ## Status
 
-Bootstrapped 2026-05-06 by BEE-151. Formula uses placeholder SHA256 hashes
-until the first `v0.0.x` tag of `beeping-cli` lands. Until then,
-`brew install beeping-io/tap/beeping-cli` will fail with a hash mismatch —
-expected.
+Bootstrapped 2026-05-06 by BEE-151. Auto-update wired 2026-05-11 by
+BEE-1782. Until the first `v0.0.x` tag of `beeping-cli` lands the
+formula still carries placeholder SHA256 hashes — the first published
+release auto-fills them.
 
 ## License
 
