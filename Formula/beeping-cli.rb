@@ -1,11 +1,15 @@
 # typed: false
 # frozen_string_literal: true
 
-# Homebrew formula for `beeping-cli`. Bootstrap version: SHA256 hashes are
-# placeholders that BEE-1782 will rewrite automatically on every release.
-# Until BEE-1782 lands, post-release the maintainer regenerates this
-# file with `shasum -a 256` against each tarball + commits the result
-# (manual cycle; documented in `external/README.md`).
+# Homebrew formula for `beeping-cli`. SHA256 hashes are auto-maintained
+# by `.github/workflows/auto-update.yml` (BEE-1782): every published
+# release of beeping-io/beeping-cli fires a `repository_dispatch` to
+# this repo which downloads SHA256SUMS for the new tag, regenerates
+# the version + 4 per-target sha256 fields via
+# `scripts/regen-formula.py`, and commits to develop. The canonical
+# *structure* of this file lives upstream at
+# `external/tap/Formula/beeping-cli.rb` in beeping-io/beeping-cli;
+# structural edits should land there first, then transplant here.
 class BeepingCli < Formula
   desc "Official Rust CLI for the Beeping Platform — data over sound"
   homepage "https://github.com/beeping-io/beeping-cli"
